@@ -25,4 +25,21 @@ describe Oystercard do
     error = "Cannot go below #{Oystercard::MIN_BALANCE}"
     expect { oystercard.deduct(1) }.to raise_error error
   end
+
+  it 'is instantiated as not in journey' do
+    expect(oystercard).not_to be_in_journey
+  end
+
+  it 'is in journey after touch in' do
+    oystercard.top_up(10)
+    oystercard.touch_in
+    expect(oystercard).to be_in_journey
+  end
+
+  it 'is not in journey after touch out' do
+    oystercard.top_up(10)
+    oystercard.touch_in
+    oystercard.touch_out
+    expect(oystercard).not_to be_in_journey
+  end
 end
