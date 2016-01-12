@@ -7,8 +7,7 @@ let(:oystercard) { described_class.new }
   end
 
   it 'can be topped up' do
-    oystercard.top_up(20)
-    expect(oystercard.balance).to eq(20)
+    expect { oystercard.top_up(20) }.to change { oystercard.balance }.by(20)
   end
 
   it 'has a maximum balance' do
